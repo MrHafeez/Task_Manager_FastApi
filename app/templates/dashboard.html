@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+  <h2>Welcome, {{ user.username }}</h2>
+  <a href="/logout">Logout</a>
+  <h3>Add Task</h3>
+  <form method="post" action="/add-task">
+    Title: <input name="title"><br>
+    Description: <input name="description"><br>
+    <button type="submit">Add</button>
+  </form>
+
+  <h3>Your Tasks</h3>
+  <ul>
+    {% for task in tasks %}
+    <li>
+      <form method="post" action="/update-task/{{ task.id }}">
+        <input name="title" value="{{ task.title }}">
+        <input name="description" value="{{ task.description }}">
+        <button type="submit">Update</button>
+        <a href="/delete-task/{{ task.id }}">Delete</a>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
